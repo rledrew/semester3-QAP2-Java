@@ -24,12 +24,15 @@ public class Money {
 
     public Money subtract(Money other) {
         Money difference = new Money(0);
-        difference.cents = this.cents - other.cents;
-        difference.dollars = this.dollars - other.dollars;
-        if (difference.cents < 0) {
-            difference.cents += 100;
-            difference.dollars--;
-        }
+    
+        long thisTotalCents = this.dollars * 100 + this.cents;
+        long otherTotalCents = other.dollars * 100 + other.cents;
+
+        long differenceTotalCents = thisTotalCents - otherTotalCents;
+    
+        difference.dollars = differenceTotalCents / 100;
+        difference.cents = differenceTotalCents % 100;
+    
         return difference;
     }
 
